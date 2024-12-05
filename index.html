@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Migration Journey Monopoly</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      background-color: #ffc196;
+      padding: 20px;
+    }
+    #board {
+      display: grid;
+      grid-template-columns: repeat(5, 100px);
+      grid-gap: 5px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .tile {
+      width: 100px;
+      height: 100px;
+      background-color: #6667ab;
+      border: 1px solid #ff0000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      position: relative;
+    }
+    .player {
+      background-color: #6667ab;
+      color: rgb(255, 145, 231);
+      padding: 5px;
+      border-radius: 50%;
+      font-size: 12px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .middle {
+      visibility: hidden;
+    }
+    #controls {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    td {
+      height: 100px;
+      width: 100px;
+      background-color: antiquewhite;
+      border: 3px solid black;
+      border-radius: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Migration Journey Monopoly</h1>
+  <p>Help Andrew move to Korea to teach English in 2000!</p>
+<center>  
+<table id="table">
+  <tr><td id="box1" onclick="checkSpace(1)">Start</td ><td id="box2" onclick="checkSpace(2)">Fill Out Forms</td><td id="box3" onclick="checkSpace(3)">Interview</td><td id="box4" onclick="checkSpace(4)">Get Visa</td></tr>
+  <tr><td onclick="checkSpace(12)"><img src="andrewphoto.jpg" height="100px" width="auto"></td><td id="storyBox" rowspan="2" colspan="2">Migration Journey Monopoly</td><td id="box5" onclick="checkSpace(5)">Book Flight</td></tr>
+  <tr><td id="box11" onclick="checkSpace(11)">Achieve Goal</td><td id="box6" onclick="checkSpace(6)">Fly to Korea</td></tr>
+  <tr><td id="box10" onclick="checkSpace(10)">Learn Korean</td><td id="box9" onclick="checkSpace(9)">Start Teaching</td><td id="box8" onclick="checkSpace(8)">Find Housing</td><td id="box7" onclick="checkSpace(7)">Cultural Adjustment</td></tr>
+</table>
+</center>
+  <div id="controls">
+    <button id="rollDiceButton">Roll Dice</button>
+    <p id="message"></p>
+  </div>
+  
+  <script>
+    let playerSpace = 0;
+    //reset spaces
+    function resetTable() {
+      for(i=1; i<=11; i++) {
+        document.getElementById("box" + i).style.backgroundColor = "antiquewhite";
+      }
+    }
+
+    function checkSpace(spaced) {
+      document.getElementById('storyBox').innerHTML = movePlayer(spaced);
+    }
+
+    function movePlayer(spaced) {
+      switch(spaced) {
+        case 1:
+        return "Andrew starts his migration journey to get out of debt";
+        break;
+        case 2:
+        return "He fills out the visa and immigration application forms";
+        break;
+        case 3:
+        return "He gets interviewed for his new teaching job in Korea and gets chosen";
+        break;
+        case 4:
+        return "Andrew goes to get a visa at the embassy";
+        break;
+        case 5:
+        return "He books a plane ticket";
+        break;
+        case 6:
+        return "He flies all the way to Korea";
+        break;
+        case 7:
+        return "He adjusts to the culture";
+        break;
+        case 8:
+        return "He gets housing in Korea";
+        break;
+        case 9:
+        return "Andrew starts teaching in Korea but he still has trouble speaking Korean";
+        break;
+        case 10:
+        return "Andrew learns Korean and can eat at a place that is not Hansot";
+        break;
+        case 11:
+        return "Congratulations! You have finished the migration journey! Andrew starts teaching at a university and makes a lot of money(he also got realy in to a clicker game called make money and is now a Googolplexaire)";
+        break;
+        case 12:
+        return "Last known photograph of Andrew Lasher"
+      }
+    }
+     
+      // Dice roll function
+      function rollDice() {
+        resetTable();
+        const diceRoll = Math.floor(Math.random() * 3) + 1; // Roll between 1 and 3
+        console.log(`Dice rolled: ${diceRoll}`); // Debug log
+        playerSpace += diceRoll;
+        if(playerSpace > 11) {
+        playerSpace = 11;
+      }
+        document.getElementById("box" + playerSpace).style.backgroundColor = "hotpink";
+        document.getElementById('storyBox').innerHTML = movePlayer(playerSpace);
+      }
+
+      // Attach event listener to the dice button
+      document.getElementById('rollDiceButton').addEventListener('click', rollDice);
+
+
+
+
+  </script>
+</body>
+</html>
